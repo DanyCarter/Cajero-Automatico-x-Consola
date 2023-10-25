@@ -95,6 +95,7 @@ function operacionesCajero(){
 
             case "5":
                 console.log("Gracias por utilizar el cajero. ¡Hasta luego!")
+                continuar = false;
                 break;
 
             default: 
