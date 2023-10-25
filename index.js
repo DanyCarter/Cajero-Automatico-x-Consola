@@ -44,14 +44,68 @@ function transferir(){
 }
 
 function iniciarSesion(){
+    //Es let por que va a cambiar, por tanto no puede ser ser const
+    let pin = prompt ("Ingrese su PIN:")
+    while (pin !== PIN_CORRECTO && intentosRestantes > 1){
+        intentosRestantes--
+        console.log(`PIN incorrecto. Le quedan ${intentosRestantes} intentos.`)
+        //Es aqui donde va a cambiar
+        pin = prompt ("Ingrese su PIN:")
+    }
+
+    if (pin === PIN_CORRECTO){
+        console.log("Inicio de sesion exitoso")
+        mostrarSaldo()
+        operacionesCajero()
+    } else {
+        console.log("PIN incorrecto. El cajero se ha bloqueado")
+    }
 
 }
 
 function operacionesCajero(){
+    let continuar = true;
 
+    while (continuar){
+        console.log("Menu del Cajero");
+        console.log("1. Consultar saldo");
+        console.log("2. Depositar dinero");
+        console.log("3. Retirar dinero");
+        console.log("4. Transferir dinero");
+        console.log("5. Salir");
+        
+        const opcion = prompt("Elija una opcion: ")
+
+        switch (opcion){
+            case "1": 
+                mostrarSaldo();
+                break;
+
+            case "2":
+                depositar();
+                break;
+            
+            case "3":
+                retirar();
+                break;
+
+            case "4":
+                transferir()
+                break;
+
+            case "5":
+                console.log("Gracias por utilizar el cajero. ¡Hasta luego!")
+                break;
+
+            default: 
+                console.log("Opcion no valida, elija una correcta basura")
+        }
+    }
 }
 
 /* Funcion Para Validar IBAN
 function esValidaEstructuraIBAN(cuentaAvalidar){
     return /[a-zA-Z]{2}[0-9]{20}$/g.test(cuentaAvalidar);
 } */
+
+iniciarSesion()
