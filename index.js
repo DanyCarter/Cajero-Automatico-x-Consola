@@ -3,26 +3,58 @@ const PIN_CORRECTO = "1234"
 let intentosRestantes = 3
 
 function mostrarSaldo(){
+/*     const getSaldo = documennt.getElementById("saldo");
+
+    getSaldo.innerHTML = `Su saldo es: ${saldo.toFixed(2)`; */
+
     console.log(`Su saldo actual es ${saldo.toFixed(2)}€`)
 }
 
 function depositar(){
-    let deposito = parseFloat(prompt("Ingrese la cantidad que desee transferir"))
+
+        const montoDeposito = prompt("Ingrese la cantidad que desea depositar:");
+        if (montoDeposito === null) {
+            // El usuario ha cancelado la operación
+            return;
+        }
+        
+        const deposito = parseFloat(montoDeposito);
+        if(isNaN(deposito) || deposito <= 0){
+            alert("La cantidad introducida es errónea");
+        } else {
+            saldo += deposito;
+            alert(`Se han depositado ${deposito}€`);
+            mostrarSaldo();
+        }
+    }
+    
+
+/*     if(inputIngresar.style.display === "none"){
+        inputIngresar.style.display = 'block'
+        buttonIngresar.innerHTML = 'cancelar'
+    }else {
+        inputIngresar.style.display = 'none'
+        buttonIngresar.innerHTML = 'Ingresar Dinero'
+    }
+
+     */
+
+   /*  let deposito = parseFloat(prompt("Ingrese la cantidad que desee transferir"))
     if(isNaN(deposito) || deposito <= 0){
         console.log("La cantidad introducida es erronea")
     } else {
         saldo =+ deposito
         console.log(`Se han depositado ${deposito}€`)
         mostrarSaldo()
-    }
-}
+    } */
+
 
 function retirar(){
     let retiro = parseFloat(prompt("Ingrese la cantidad a retirar"))
     if(isNaN(retiro) || retiro <= 0 || retiro > saldo){
         console.log("Cantidadinvalida o insuficiente. Intentelo de nuevo...")
     } else {
-        saldo += retiro
+        saldo -= retiro
         console.log(`Ha retirado ${retiro}€`)
         mostrarSaldo();
     }
@@ -48,7 +80,7 @@ function iniciarSesion(){
     let pin = prompt ("Ingrese su PIN:")
     while (pin !== PIN_CORRECTO && intentosRestantes > 1){
         intentosRestantes--
-        console.log(`PIN incorrecto. Le quedan ${intentosRestantes} intentos.`)
+        alert(`PIN incorrecto. Le quedan ${intentosRestantes} intentos.`)
         //Es aqui donde va a cambiar
         pin = prompt ("Ingrese su PIN:")
     }
@@ -58,55 +90,10 @@ function iniciarSesion(){
         mostrarSaldo()
         operacionesCajero()
     } else {
-        console.log("PIN incorrecto. El cajero se ha bloqueado")
+        alert("PIN incorrecto. El cajero se ha bloqueado");
+        window.location.href = "cajeroBloqueado.html"; 
     }
 
 }
-
-function operacionesCajero(){
-    let continuar = true;
-
-    while (continuar){
-        console.log("Menu del Cajero");
-        console.log("1. Consultar saldo");
-        console.log("2. Depositar dinero");
-        console.log("3. Retirar dinero");
-        console.log("4. Transferir dinero");
-        console.log("5. Salir");
-        
-        const opcion = prompt("Elija una opcion: ")
-
-        switch (opcion){
-            case "1": 
-                mostrarSaldo();
-                break;
-
-            case "2":
-                depositar();
-                break;
-            
-            case "3":
-                retirar();
-                break;
-
-            case "4":
-                transferir()
-                break;
-
-            case "5":
-                console.log("Gracias por utilizar el cajero. ¡Hasta luego!")
-                continuar = false;
-                break;
-
-            default: 
-                console.log("Opcion no valida, elija una correcta basura")
-        }
-    }
-}
-
-/* Funcion Para Validar IBAN
-function esValidaEstructuraIBAN(cuentaAvalidar){
-    return /[a-zA-Z]{2}[0-9]{20}$/g.test(cuentaAvalidar);
-} */
 
 iniciarSesion()
