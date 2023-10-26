@@ -1,0 +1,13 @@
+body {
+    background-color: #ff0000;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    font-family: Gratina;
+    font-size: 80px;
+    margin-top: 0;
+    font-weight: bold;
+}

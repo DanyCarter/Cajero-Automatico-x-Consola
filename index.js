@@ -3,12 +3,12 @@ const PIN_CORRECTO = "1234"
 let intentosRestantes = 3
 
 function mostrarSaldo(){
-/*     const getSaldo = documennt.getElementById("saldo");
-
-    getSaldo.innerHTML = `Su saldo es: ${saldo.toFixed(2)`; */
-
-    console.log(`Su saldo actual es ${saldo.toFixed(2)}€`)
+    // Añadir el mensaje "Tu saldo total es " y el valor actual del saldo
+    const saldoElement = document.createElement("p");
+    saldoElement.innerHTML = `Tu saldo total es: ${saldo.toFixed(2)}`;
+    document.querySelector("#container").appendChild(saldoElement);
 }
+
 
 function depositar(){
 
@@ -22,31 +22,10 @@ function depositar(){
         if(isNaN(deposito) || deposito <= 0){
             alert("La cantidad introducida es errónea");
         } else {
-            saldo += deposito;
-            alert(`Se han depositado ${deposito}€`);
-            mostrarSaldo();
+            saldo += deposito
+            mostrarSaldo()
         }
     }
-    
-
-/*     if(inputIngresar.style.display === "none"){
-        inputIngresar.style.display = 'block'
-        buttonIngresar.innerHTML = 'cancelar'
-    }else {
-        inputIngresar.style.display = 'none'
-        buttonIngresar.innerHTML = 'Ingresar Dinero'
-    }
-
-     */
-
-   /*  let deposito = parseFloat(prompt("Ingrese la cantidad que desee transferir"))
-    if(isNaN(deposito) || deposito <= 0){
-        console.log("La cantidad introducida es erronea")
-    } else {
-        saldo =+ deposito
-        console.log(`Se han depositado ${deposito}€`)
-        mostrarSaldo()
-    } */
 
 
 function retirar(){
@@ -55,8 +34,7 @@ function retirar(){
         console.log("Cantidadinvalida o insuficiente. Intentelo de nuevo...")
     } else {
         saldo -= retiro
-        console.log(`Ha retirado ${retiro}€`)
-        mostrarSaldo();
+        mostrarSaldo()
     }
 }
 
@@ -81,7 +59,6 @@ function iniciarSesion(){
     while (pin !== PIN_CORRECTO && intentosRestantes > 1){
         intentosRestantes--
         alert(`PIN incorrecto. Le quedan ${intentosRestantes} intentos.`)
-        //Es aqui donde va a cambiar
         pin = prompt ("Ingrese su PIN:")
     }
 
@@ -93,7 +70,10 @@ function iniciarSesion(){
         alert("PIN incorrecto. El cajero se ha bloqueado");
         window.location.href = "cajeroBloqueado.html"; 
     }
+}
 
+function operacionesCajero(){
+    //Aquí van a ir las funciones de las operaciones del cajero
 }
 
 iniciarSesion()
